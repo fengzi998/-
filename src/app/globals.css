@@ -7,25 +7,16 @@
    ================================ */
 
 :root {
-  /* 背景色 - 医疗白色 */
   --background: #F5F7FA;
   --foreground: #1F2937;
-
-  /* 主色 - 科技紫色 */
   --primary: #7C3AED;
   --primary-hover: #6D28D9;
   --primary-light: #F3E8FF;
-
-  /* 边框色 */
   --border: #E5E7EB;
   --border-hover: #C084FC;
-
-  /* 文字色 */
   --text-primary: #1F2937;
   --text-secondary: #6B7280;
   --text-tertiary: #9CA3AF;
-
-  /* 状态色 */
   --success: #10B981;
   --warning: #F59E0B;
   --danger: #EF4444;
@@ -42,10 +33,6 @@
     --border: #374151;
   }
 }
-
-/* ================================
-   基础样式
-   ================================ */
 
 * {
   box-sizing: border-box;
@@ -69,10 +56,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ================================
-   滚动条样式
-   ================================ */
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -91,16 +74,11 @@ body {
   background: var(--border-hover);
 }
 
-/* ================================
-   自定义工具类
-   ================================ */
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 
-  /* 渐变文字 */
   .gradient-text {
     background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
     -webkit-background-clip: text;
@@ -108,14 +86,12 @@ body {
     background-clip: text;
   }
 
-  /* 玻璃态效果 */
   .glass {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* 卡片悬停效果 */
   .card-hover {
     transition: all 0.2s ease;
   }
@@ -125,22 +101,47 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
-  /* 按钮基础样式 */
-  .btn-primary {
-    @apply px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .btn-secondary {
-    @apply px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200;
-  }
-
-  /* 输入框基础样式 */
-  .input-base {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200;
-  }
-
-  /* 卡片基础样式 */
   .card-base {
-    @apply bg-white rounded-2xl shadow-sm border border-gray-200 p-4;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border: 1px solid #E5E7EB;
+    padding: 1rem;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .bg-gradient-draw {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
   }
 }

@@ -1,17 +1,20 @@
 {
-  "name": "my-app",
+  "name": "medical-aesthetic-ai-saas",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "医疗美容 AI 营销 SaaS 平台",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@nutui/nutui-react": "^3.0.18",
-    "@prisma/client": "^7.2.0",
+    "@prisma/client": "^6.0.0",
     "framer-motion": "^12.23.26",
     "html2canvas": "^1.4.1",
     "next": "^16.1.1",
@@ -25,8 +28,8 @@
     "@types/react": "^19.2.7",
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
-    "prisma": "^7.2.0",
-    "tailwindcss": "^4.1.18",
+    "prisma": "^6.0.0",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.9.3"
   }
 }
