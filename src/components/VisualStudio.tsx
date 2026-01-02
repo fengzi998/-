@@ -42,7 +42,11 @@ const FONT_COLORS = [
 
 const FONT_SIZES = [12, 14, 16, 18, 20, 24, 28, 32, 36, 42];
 
-export default function VisualStudio() {
+interface VisualStudioProps {
+  strategy?: string;
+}
+
+export default function VisualStudio({ strategy }: VisualStudioProps) {
   const [images, setImages] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [textOverlays, setTextOverlays] = useState<TextOverlay[]>([]);

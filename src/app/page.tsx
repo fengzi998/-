@@ -1,9 +1,21 @@
+'use client';
+
+import { useState } from 'react';
 import StrategyBrain from '@/components/StrategyBrain';
 import VisualStudio from '@/components/VisualStudio';
-import ReportPreview from '@/components/ReportPreview';
+import ReportPreview, { notifyStrategyGenerated } from '@/components/ReportPreview';
 import InteractionSetup from '@/components/InteractionSetup';
 
 export default function Home() {
+  const [currentStrategy, setCurrentStrategy] = useState<string>('');
+
+  // 处理策略生成完成
+  const handleStrategyGenerated = (strategy: string) => {
+    setCurrentStrategy(strategy);
+    // 通知 ReportPreview 组件
+    notifyStrategyGenerated(strategy);
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-medical-100 to-purple-50 p-4 md:p-6">
       {/* Header */}
@@ -24,7 +36,7 @@ export default function Home() {
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-6 h-[calc(100vh-140px)]">
         {/* Left: StrategyBrain (40%) */}
-        <div className="lg:col-span-2 card-base card-hover animate-fade-in overflow-hidden">
+        <div className="lg:col-span-2 card-base card-hover animate-fade-in overflow-hidden flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -36,13 +48,15 @@ export default function Home() {
             </div>
             <span className="text-xs px-2 py-1 bg-gradient-primary text-white rounded-full shadow-sm">AI</span>
           </div>
-          <StrategyBrain />
+          <div className="flex-1 min-h-0">
+            <StrategyBrain onStrategyGenerated={handleStrategyGenerated} />
+          </div>
         </div>
 
         {/* Right: Vertical Stack (60%) */}
         <div className="lg:col-span-3 flex flex-col gap-4 md:gap-6">
           {/* VisualStudio */}
-          <div className="card-base card-hover animate-fade-in overflow-hidden" style={{ animationDelay: '0.1s' }}>
+          <div className="card-base card-hover animate-fade-in overflow-hidden flex-1" style={{ animationDelay: '0.1s' }}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -54,7 +68,9 @@ export default function Home() {
               </div>
               <span className="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full">Flux AI</span>
             </div>
-            <VisualStudio />
+            <div className="h-[calc(100%-60px)]">
+              <VisualStudio strategy={currentStrategy} />
+            </div>
           </div>
 
           {/* ReportPreview + InteractionSetup (Row) */}
@@ -72,7 +88,9 @@ export default function Home() {
                 </div>
                 <span className="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">H5</span>
               </div>
-              <ReportPreview />
+              <div className="h-[calc(100%-60px)]">
+                <ReportPreview strategy={currentStrategy} />
+              </div>
             </div>
 
             {/* InteractionSetup */}
@@ -88,7 +106,9 @@ export default function Home() {
                 </div>
                 <span className="text-xs px-2 py-1 bg-orange-100 text-orange-600 rounded-full">H5</span>
               </div>
-              <InteractionSetup />
+              <div className="h-[calc(100%-60px)]">
+                <InteractionSetup strategy={currentStrategy} />
+              </div>
             </div>
           </div>
         </div>

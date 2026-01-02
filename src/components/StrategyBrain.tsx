@@ -16,7 +16,11 @@ interface Conversation {
   createdAt: Date;
 }
 
-export default function StrategyBrain() {
+interface StrategyBrainProps {
+  onStrategyGenerated?: (strategy: string) => void;
+}
+
+export default function StrategyBrain({ onStrategyGenerated }: StrategyBrainProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -129,6 +133,11 @@ export default function StrategyBrain() {
 
       setMessages((prev) => [...prev, assistantMessage]);
       setStreamingContent('');
+
+      // 通知父组件策略已生成
+      if (onStrategyGenerated && fullContent) {
+        onStrategyGenerated(fullContent);
+      }
 
       // 更新对话标题（使用第一条用户消息的前 20 个字符）
       if (messages.length === 0 && currentConversationId) {

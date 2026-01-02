@@ -8,7 +8,11 @@ interface Prize {
   probability: number;
 }
 
-export default function InteractionSetup() {
+interface InteractionSetupProps {
+  strategy?: string;
+}
+
+export default function InteractionSetup({ strategy }: InteractionSetupProps) {
   const [prizes, setPrizes] = useState<Prize[]>([
     { id: 1, name: '免费体验券', probability: 0.1 },
     { id: 2, name: '8折优惠券', probability: 0.2 },
