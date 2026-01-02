@@ -1,0 +1,49 @@
+// Prisma Schema for Medical Aesthetic AI Marketing SaaS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户模型
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  password  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+}
+
+// 项目模型
+model Project {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt      String   @db.Text
+  strategy    String?  @db.Text
+  title       String?
+  status      String   @default("draft") // draft, generating, completed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  assets      Asset[]
+}
+
+// 素材模型
+model Asset {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type        String   // poster, slide, h5
+  url         String
+  title       String?
+  description String?  @db.Text
+  metadata    Json?    // 存储额外的元数据
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
